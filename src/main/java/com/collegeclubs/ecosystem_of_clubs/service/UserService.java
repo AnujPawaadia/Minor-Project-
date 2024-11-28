@@ -2,6 +2,7 @@ package com.collegeclubs.ecosystem_of_clubs.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,17 +35,24 @@ public class UserService{
         return userRepository.save(user);
     }
 
-    public List<User> getAllClubs() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+    public Optional<User> findUser(String email)
+    {
+        return userRepository.findByEmail(email);
     }
 
     public HashMap<String, Object> verifyUserAndGenerateToken(String email, String password, Role role) throws Exception{
+
         
         Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
 
         if(!authentication.isAuthenticated()) throw new Exception("Authentication Failed");
+        System.out.println("Authorities for user " + email + ": " + authentication.getAuthorities());
 
         User user =(User) authentication.getPrincipal();
+        System.out.println("user " + email + ": " + user);
 
         if(!user.getRole().equals(role)) throw new  Exception("Incorrect role");
 
@@ -55,6 +63,7 @@ public class UserService{
         response.put("token",token);
         response.put("email",user.getEmail());
         response.put("user",user);
+        response.put("role",user.getRole());
 
         return response;
     }

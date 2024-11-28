@@ -1,21 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<d%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+  <!DOCTYPE html>
+  <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing Page</title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/common.js"></script>
+    <script src="${pageContext.request.contextPath}/js/nav.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
       * {
         margin: 0;
         padding: 0;
@@ -24,19 +26,25 @@ pageEncoding="UTF-8"%>
 
       body {
         background: #E2F3FB;
-        overflow: hidden;
+        overflow: auto;
+        overflow-x: hidden; /* Allow scrolling */
       }
 
-      .container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 1400px;
-        height: 600px;
-        background: #f5f5f5;
+      .profile-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin: auto;
+        margin-right: 10px;
       }
 
+      #profile-item {
+        cursor: pointer;
+      }
+
+      #username {
+        font-weight: bold;
+      }
       .container .slide .item {
         width: 200px;
         height: 300px;
@@ -58,19 +66,24 @@ pageEncoding="UTF-8"%>
         border-radius: 0;
         width: 100%;
         height: 100%;
+        opacity: 1;
       }
 
       .slide .item:nth-child(3) {
         left: 80%;
-      }
-      .slide .item:nth-child(4) {
-        left: calc(80% + 220px);
-      }
-      .slide .item:nth-child(5) {
-        left: calc(80% + 220px);
+        opacity: 0;
       }
 
-      /* here n = 0, 1, 2, 3,... */
+      .slide .item:nth-child(4) {
+        left: calc(80% + 220px);
+        opacity: 0;
+      }
+
+      .slide .item:nth-child(5) {
+        left: calc(80% + 220px);
+        opacity: 0;
+      }
+
       .slide .item:nth-child(n + 6) {
         left: calc(80% + 220px);
         opacity: 0;
@@ -89,8 +102,8 @@ pageEncoding="UTF-8"%>
       }
 
       .content button:hover {
-        color: #ffffff; /* White */
-        background-color: #ff8c00; /* Dark orange */
+        color: #ffffff;
+        background-color: #ff8c00;
       }
 
       .slide .item:nth-child(2) .content {
@@ -154,252 +167,56 @@ pageEncoding="UTF-8"%>
 
       .button button:hover {
         background: #ababab;
-        color:#015f85 ;
+        color: #015f85;
       }
-      /* Navbar styling */
-nav {
-    position: absolute;
-    z-index: 99;
-    width: 100%;
-    background: #FFF;
-}
 
-nav .wrapper {
-    position: relative;
-    max-width: 1300px;
-    padding: 0px 30px;
-    height: 70px;
-    line-height: 70px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+      .logo img {
+        padding-top: 30px;
+        max-width: 100%;
+        transition: transform 0.3s ease;
+      }
 
-/* Logo styling */
-.wrapper .logo {
-    display: flex; /* Flexbox for alignment */
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
-    padding: 10px; /* Optional: Add some padding around the logo */
-}
+      .logo a:hover img {
+        transform: scale(1.05);
+      }
 
-.logo {
-    align-items: bottom;
-}
+      .wrapper .nav-links {
+        display: inline-flex;
+      }
 
-/* Styling the logo image */
-.logo img {
-  padding-top: 30px;
-    height: 200px; /* Initial height for the logo */
-    width: 300px; /* Maintain aspect ratio */
-    max-width: 100%; /* Ensure the logo fits within the container */
-    transition: transform 0.3s ease; /* Smooth transition effect */
-}
+      .nav-links li {
+        list-style: none;
+      }
 
-/* Adding a hover effect for the logo */
-.logo a:hover img {
-    transform: scale(1.05); /* Slightly enlarge the logo on hover */
-}
-
-/* Responsive adjustments */
-@media screen and (max-width: 970px) {
-    .logo img {
-        height: 80px;
-        width: 40px; /* Adjust height for smaller screens */
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .logo img {
-        height: 80px;
-        width: 40px; /* Adjust height for even smaller screens */
-    }
-}
-
-/* Nav links styling */
-.wrapper .nav-links {
-    display: inline-flex;
-}
-
-.nav-links li {
-    list-style: none;
-}
-
-.nav-links li a {
-    color: #027AA8;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 500;
-    padding: 9px 15px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.nav-links li a:hover {
-    background: #96badf;
-}
-
-/* Mobile nav toggle button */
-.wrapper .btn {
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
-    display: none;
-}
-
-.wrapper .btn.close-btn {
-    position: absolute;
-    right: 30px;
-    top: 10px;
-}
-
-/* Mobile view styles */
-@media screen and (max-width: 970px) {
-    .wrapper .btn {
-        display: block;
-    }
-    .wrapper .nav-links {
-        position: fixed;
-        height: 100vh;
-        width: 100%;
-        max-width: 350px;
-        top: 0;
-        left: -100%;
-        background: #027AA8;
-        display: block;
-        padding: 50px 10px;
-        line-height: 50px;
-        overflow-y: auto;
-        transition: all 0.3s ease;
-    }
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-        width: 10px;
-    }
-    ::-webkit-scrollbar-track {
-        background: #027AA8;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #027AA8;
-    }
-    #menu-btn:checked ~ .nav-links {
-        left: 0%;
-    }
-    #menu-btn:checked ~ .btn.menu-btn {
-        display: none;
-    }
-    #close-btn:checked ~ .btn.menu-btn {
-        display: block;
-    }
-    .nav-links li {
-        margin: 15px 10px;
-    }
-    .nav-links li a {
-        padding: 0 20px;
-        display: block;
-        font-size: 20px;
-    }
-    .nav-links .drop-menu {
-        position: static;
-        opacity: 1;
-        top: 65px;
-        visibility: visible;
-        padding-left: 20px;
-        width: 100%;
-        max-height: 0px;
-        overflow: hidden;
-        box-shadow: none;
-        transition: all 0.3s ease;
-    }
-    .nav-links .mobile-item {
-        display: block;
-        color: #f2f2f2;
-        font-size: 20px;
-        font-weight: 500;
-        padding-left: 20px;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: all 0.3s ease;
-    }
-    .nav-links .mobile-item:hover {
-        background: #027AA8;
-    }
-    .drop-menu li {
-        margin: 0;
-    }
-    .drop-menu li a {
-        border-radius: 5px;
+      .nav-links li a {
+        color: #027AA8;
+        text-decoration: none;
         font-size: 18px;
-    }
-}
+        font-weight: 500;
+        padding: 9px 15px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+      }
 
-/* Nav input styling */
-nav input {
-    display: none;
-}
+      .nav-links li a:hover {
+        background: #96badf;
+      }
 
-.carousel {
-  width: 60%;
-  overflow: hidden;
-  position: relative;
-}
-
-.slide {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-}
-
-.item {
-  display: flex;
-  justify-content: space-between;
-  min-width: 100%;
-}
-
-.card-group {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.card {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  flex: 1;
-  margin: 0 10px;
-  width: 90px;
-}
-
-.card-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-right: 20px;
-}
-
-.card-desc {
-  flex: 1;
-}
-
-
-      .body-text {
-        position: absolute;
+      .wrapper .btn {
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        display: none;
+      }
+      .container {
+        position: relative;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 100%;
-        text-align: center;
-        padding: 0 30px;
+        width: 100vw;
+        height: 100vh;
+        background: #f5f5f5;
       }
-      .body-text div {
-        font-size: 45px;
-        font-weight: 600;
-      }
-      
     </style>
   </head>
 
@@ -408,35 +225,49 @@ nav input {
       <div class="wrapper">
         <div class="logo">
           <a href="#">
-            <img
-              src="images/UPES University of Petroleum and Energy Studies.png"
-              alt="Logo"
-            />
+            <img src="images/UPES University of Petroleum and Energy Studies.png" alt="Logo" />
           </a>
         </div>
         <input type="radio" name="slider" id="menu-btn" />
         <input type="radio" name="slider" id="close-btn" />
         <ul class="nav-links">
-          <label for="close-btn" class="btn close-btn"
-            ><i class="fas fa-times"></i
-          ></label>
+          <label for="close-btn" class="btn close-btn">
+            <i class="fas fa-times"></i>
+          </label>
           <li><a href="#">Home</a></li>
-          <li><a href="slider.jsp">Clubs</a></li>
-          <li><a href="clubAdminDash.jsp">Feedback</a></li>
-          <li><a href="#">Login</a></li>
+          <!-- <li><a href="/clubs">Clubs</a></li> -->
+          <li id="club-dropdown">
+            <a href="#">Clubs</a>
+            <ul class="dropdown-list" id="club-dropdown-list">
+              <!-- Club names will be dynamically inserted here -->
+               <!-- <li>sample</li>
+               <li>sample</li>
+               <li>sample</li> -->
+            </ul>
+          </li>
+          <li id="login-link"><a href="/login">Login</a></li>
+          <li id="profile-item" style="display: none;">
+            <a href="#" id="logoutLink">Logout</a>
+            <img src="images/profile.png" alt="Profile" class="profile-icon" />
+            <span id="username"></span> 
+          </li>
         </ul>
-        <label for="menu-btn" class="btn menu-btn"
-          ><i class="fas fa-bars"></i
-        ></label>
+        <label for="menu-btn" class="btn menu-btn">
+          <i class="fas fa-bars"></i>
+        </label>
       </div>
     </nav>
+    
 
+
+    <div class="banner-image">
+      <img src="${pageContext.request.contextPath}/images/banner.jpeg" alt="Banner Image" style="width: 100%; height: auto; display: block; margin: 80px auto; margin-top: 100px;" />
+    </div>
+    
+    
     <div class="container">
       <div class="slide">
-        <div
-          class="item"
-          style="background-image: url(https://i.ibb.co/qCkd9jS/img1.jpg)"
-        >
+        <div class="item" style="background-image: url('images/group.jpg')">
           <div class="content">
             <div class="name">UPES ACM</div>
             <div class="des">
@@ -445,10 +276,7 @@ nav input {
             <button>See More</button>
           </div>
         </div>
-        <div
-          class="item"
-          style="background-image: url(https://i.ibb.co/jrRb11q/img2.jpg)"
-        >
+        <div class="item" style="background-image: url('/images/mtc.jpeg')">
           <div class="content">
             <div class="name">Microsoft Technical Community - UPES</div>
             <div class="des">
@@ -457,10 +285,7 @@ nav input {
             <button>See More</button>
           </div>
         </div>
-        <div
-          class="item"
-          style="background-image: url(https://i.ibb.co/NSwVv8D/img3.jpg)"
-        >
+        <div class="item" style="background-image:url('/images/csi.jpeg')">
           <div class="content">
             <div class="name">Computer Society of India</div>
             <div class="des">
@@ -469,10 +294,7 @@ nav input {
             <button>See More</button>
           </div>
         </div>
-        <div
-          class="item"
-          style="background-image: url(https://i.ibb.co/Bq4Q0M8/img4.jpg)"
-        >
+        <div class="item" style="background-image: url('/images/inf.jpeg')">
           <div class="content">
             <div class="name">Infinity Club – Aerospace</div>
             <div class="des">
@@ -481,10 +303,7 @@ nav input {
             <button>See More</button>
           </div>
         </div>
-        <div
-          class="item"
-          style="background-image: url(https://i.ibb.co/jTQfmTq/img5.jpg)"
-        >
+        <div class="item" style="background-image: url('/images/fipi.jpg')">
           <div class="content">
             <div class="name">UPES FIPI Student Chapter</div>
             <div class="des">
@@ -493,10 +312,7 @@ nav input {
             <button>See More</button>
           </div>
         </div>
-        <div
-          class="item"
-          style="background-image: url(https://i.ibb.co/RNkk6L0/img6.jpg)"
-        >
+        <div class="item" style="background-image: url('/images/spe.png')">
           <div class="content">
             <div class="name">SPE - Society of Petroleum Engineers</div>
             <div class="des">
@@ -510,65 +326,38 @@ nav input {
         <button class="next"><i class="fa-solid fa-arrow-left"></i></button>
         <button class="prev"><i class="fa-solid fa-arrow-right"></i></button>
       </div>
+    </div>
 
 
     </div>
-    <div class="carousel">
-      <div class="slide">
-          <!-- Each group will have a class of 'item' -->
-          <div class="item">
-              <!-- Card Group 1 -->
-              <div class="card-group">
-                  <div class="card">
-                      <img src="image1.jpg" alt="Image 1" class="card-img">
-                      <div class="card-desc">Description 1</div>
-                  </div>
-                  <div class="card">
-                      <img src="image2.jpg" alt="Image 2" class="card-img">
-                      <div class="card-desc">Description 2</div>
-                  </div>
-                  <div class="card">
-                      <img src="image3.jpg" alt="Image 3" class="card-img">
-                      <div class="card-desc">Description 3</div>
-                  </div>
-              </div>
-          </div>
-          <div class="item">
-              <!-- Card Group 2 -->
-              <div class="card-group">
-                  <div class="card">
-                      <img src="image4.jpg" alt="Image 4" class="card-img">
-                      <div class="card-desc">Description 4</div>
-                  </div>
-                  <div class="card">
-                      <img src="image5.jpg" alt="Image 5" class="card-img">
-                      <div class="card-desc">Description 5</div>
-                  </div>
-                  <div class="card">
-                      <img src="image6.jpg" alt="Image 6" class="card-img">
-                      <div class="card-desc">Description 6</div>
-                  </div>
-              </div>
-          </div>
-          <!-- Add more card groups as needed up to 6 groups -->
-      </div>
-  </div>
-
-  </div>
 
     <script>
       let next = document.querySelector(".next");
       let prev = document.querySelector(".prev");
 
-      next.addEventListener("click", function () {
+      // Function to move the slider to the next item
+      function slideNext() {
         let items = document.querySelectorAll(".item");
         document.querySelector(".slide").appendChild(items[0]);
-      });
+      }
+
+      // Event listeners for manual controls
+      next.addEventListener("click", slideNext);
 
       prev.addEventListener("click", function () {
         let items = document.querySelectorAll(".item");
         document.querySelector(".slide").prepend(items[items.length - 1]);
       });
+
+      // Automatic slide every 3 seconds
+      setInterval(slideNext, 5000);
+
+      // Logout function handler
+      $("#logoutLink").on("click", function (e) {
+        e.preventDefault(); // Prevent the default link behavior
+        logout();
+      });
     </script>
   </body>
-</html>
+
+  </html>
